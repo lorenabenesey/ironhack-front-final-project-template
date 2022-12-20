@@ -1,7 +1,6 @@
 <template>
-  <section>
-    <router-view class="app-main" />
-  </section>
+  <Header />
+  <router-view class="app-main" />
 </template>
 
 <script setup>
@@ -9,6 +8,8 @@ import { onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import { useRouter } from "vue-router";
 import { useUserStore } from "./store/user.js";
+
+import Header from "./components/Header.vue";
 
 const router = useRouter();
 const userStore = useUserStore();
