@@ -5,20 +5,20 @@ import Register from "../pages/Register.vue";
 
 const routes = [
   {
-     path: "/Home.vue",
+    path: "/pages/Home.vue",
     name: "Home",
     component: Home,
   },
   {
-    path: "../pages/Login.vue",
-   name: "Login",
-   component: Login,
- },
- {
-  path: "../pages/Register.vue",
- name: "Register",
- component: Register,
-},
+    path: "/pages/Login.vue",
+    name: "Login",
+    component: Login,
+  },
+  {
+    path: "/pages/Register.vue",
+    name: "Register",
+    component: Register,
+  },
 ];
 
 const router = createRouter({
