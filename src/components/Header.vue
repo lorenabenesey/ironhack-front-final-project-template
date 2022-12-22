@@ -6,6 +6,7 @@
       <nav class="ml-6 lg:ml-12">
         <router-link to="/" class="inline-block px-4 py-2 text-sm font-semibold rounded-full leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Home</router-link>
         <router-link to="/about" class="inline-block px-4 py-2 text-sm font-semibold rounded-full leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">Tasks</router-link>
+     
       </nav>
     </div>
     <div>
