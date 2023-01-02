@@ -1,6 +1,7 @@
 <template>
   <Header />
   <router-view class="app-main" />
+ 
 </template>
 
 <script setup>

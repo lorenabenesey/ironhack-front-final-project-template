@@ -1,15 +1,18 @@
 <template>
-  <form class="w-full max-w-sm mx-auto p-6 bg-white rounded-lg shadow-md">
+  <form class="w-full max-w-sm mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
     <!--Error message-->
     <div v-if="errorMsg" class="mb-10 p-4 rounded-md bg-light-grey">
         <p class="text-red-500">{{ errorMsg }}</p>
     </div>
+
+    <!--Register-->
     <div class="mb-4">
       <label for="email" class="block font-bold text-gray-700 text-sm mb-2">
         Email
       </label>
       <input
         v-model="email"
+        required
         id="email"
         type="email"
         class="w-full py-2 px-3 leading-tight text-gray-700 border rounded focus:outline-none focus:shadow-outline"
@@ -21,6 +24,7 @@
       </label>
       <input
         v-model="password"
+        required
         id="password"
         type="password"
         class="w-full py-2 px-3 leading-tight text-gray-700 border rounded focus:outline-none focus:shadow-outline"
@@ -35,18 +39,20 @@
       </label>
       <input
         v-model="passwordConfirm"
+        required
         id="password-confirm"
         type="password"
         class="w-full py-2 px-3 leading-tight text-gray-700 border rounded focus:outline-none focus:shadow-outline"
       />
     </div>
     <div class="flex items-center justify-between">
-      <button
+      <button>
         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         type="submit"
       >
-        Submit
+        Register
       </button>
+      <router-link class="text-sm mt-6 text-center" :to="{ name: 'Login' }">Already have an account? <span class="text-at-gray-700">Login</span> </router-link>
     </div>
   </form>
 </template>
