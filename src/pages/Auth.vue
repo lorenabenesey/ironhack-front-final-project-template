@@ -45,11 +45,22 @@
 
 <script setup>
 import { ref } from "vue";
+import { useUserStore } from "../store/user";
+
 const email = ref(null);
 const password = ref(null);
 const errorMsg = ref(null);
+const userStore = useUserStore();
 
 // Login function
+
+async function logIn(email, password) {
+    try {
+        await userStore.signIn(email.value, password.value);
+    } catch(e) {
+        errorMsg.value = e.message;
+    }
+}
 </script>
 
 <style scoped></style>
