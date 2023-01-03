@@ -23,7 +23,7 @@ export const useUserStore = defineStore("user", {
     },
     // Hacer sign in
     async signIn(email, password) {
-      const { user, error } = await supabase.auth.signInWithPassword({
+      const { user, error } = await supabase.auth.signIn({
         email: email,
         password: password,
       });

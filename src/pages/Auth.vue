@@ -1,5 +1,5 @@
 <template>
-  <form class="w-full max-w-sm mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
+  <form @submit.prevent="logIn" class="w-full max-w-sm mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
     <!--Error message-->
     <div v-if="errorMsg" class="mb-10 p-4 rounded-md bg-light-grey">
       <p class="text-red-500">{{ errorMsg }}</p>
@@ -32,7 +32,7 @@
     </div>
 
     <div class="flex items-center justify-between">
-      <button
+      <button 
         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4
         rounded focus:outline-none focus:shadow-outline" type="submit" > Login
       </button>
@@ -46,6 +46,7 @@
 <script setup>
 import { ref } from "vue";
 import { useUserStore } from "../store/user";
+import router from "../router";
 
 const email = ref(null);
 const password = ref(null);
@@ -54,9 +55,11 @@ const userStore = useUserStore();
 
 // Login function
 
-async function logIn(email, password) {
+async function logIn() {
     try {
         await userStore.signIn(email.value, password.value);
+        router.push({ path: "/" });
+
     } catch(e) {
         errorMsg.value = e.message;
     }

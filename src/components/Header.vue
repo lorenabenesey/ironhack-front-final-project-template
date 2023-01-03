@@ -16,7 +16,7 @@
         >Login</router-link
       >
       <button
-        @click="signOut"
+        @click="logOut"
         class="px-4 py-2 text-sm font-semibold rounded-full leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
       >
         Logout
@@ -28,17 +28,21 @@
 <script setup>
 import { ref } from "vue";
 import { useUserStore } from "../store/user";
+import router from "../router";
 
 const errorMsg = ref(null);
 const userStore = useUserStore();
 
-async function signOut() {
+async function logOut() {
   try {
-    await useUserStore.signOut();
+    await userStore.signOut();
+    router.push({ path: "/auth" });
+
   } catch (e) {
     errorMsg.value = e.message;
+    console.log(errorMsg.value);
   }
-  console.log('pepe');
+  
 }
 </script>
 <style></style>
