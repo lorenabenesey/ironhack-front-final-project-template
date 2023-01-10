@@ -52,17 +52,6 @@ async function addTask() {
 
 };
 
-async function getTasks() {
-  try {
-    await taskStore.fetchTasks();
-    newTaskText.value = task.title;
-  } catch (e) {
-    errorMsg.value = e.message;
-    console.log(errorMsg.value);
-
-  }
-}; 
-
 onMounted(async () => {
   try {
     await taskStore.fetchTasks();
