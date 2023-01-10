@@ -16,6 +16,16 @@ export const useTaskStore = defineStore("tasks", {
       this.tasks = tasks;
     },
     // Hacer POST
+
+    async addTask(title, user) {
+      const { data, error } = await supabase
+        .from("tasks")
+        .insert({ title: title, user_id: user })
+        .select();
+      if (error) throw error;
+      console.log(data);
+    },
+
     // Hacer el PUT (edit)
     // Hacer el delete
     // Hacer el PUT (cambiar entre completada y pendiente)
