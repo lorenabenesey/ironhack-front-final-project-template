@@ -24,20 +24,28 @@ export const useTaskStore = defineStore("tasks", {
         .select();
       this.fetchTasks();
       if (error) throw error;
-      console.log(data);
     },
 
     // Hacer el PUT (edit)
-    async editTask(title, user) {
+    async editTask(title, id) {
       const { data, error } = await supabase
         .from("tasks")
-        .update({ title: title, user_id: user })
-        .match({ title: newtitle });
+        .update({ title: title })
+        .match({ id: id });
+      this.fetchTasks();
       if (error) throw error;
-      console.log(data);
     },
 
     // Hacer el delete
+    async deleteTask(id) {
+      const { data, error } = await supabase
+        .from("tasks")
+        .delete()
+        .match({ id: id });
+      this.fetchTasks();
+      if (error) throw error;
+    },
+
     // Hacer el PUT (cambiar entre completada y pendiente)
   },
 });
