@@ -47,5 +47,14 @@ export const useTaskStore = defineStore("tasks", {
     },
 
     // Hacer el PUT (cambiar entre completada y pendiente)
+
+    async isComplete(id) {
+      const { data, error } = await supabase
+        .from("tasks")
+        .update({ is_complete: true })
+        .match({ id: id });
+      this.fetchTasks();
+      if (error) throw error;
+    },
   },
 });

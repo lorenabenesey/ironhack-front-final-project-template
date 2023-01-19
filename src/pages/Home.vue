@@ -3,7 +3,8 @@
     <h1 class="text-2xl font-bold mb-4">To-Do List</h1>
     <ul class="task-list">
       <li v-for="task in taskStore.tasks" class="flex items-center mb-4">
-        <input type="checkbox" class="form-checkbox h-6 w-6 text-indigo-600 transition duration-150 ease-in-out" />
+        <input @click="isCompleted(task.id)" type="checkbox"
+          class="form-checkbox h-6 w-6 text-indigo-600 transition duration-150 ease-in-out" />
         <span class="ml-3 flex-1 font-medium text-gray-900">{{
           task.title
         }}</span>
@@ -15,7 +16,7 @@
           class="text-sm font-medium text-red-600 hover:text-red-500 focus:outline-none focus:underline transition duration-150 ease-in-out ml-2">
           Delete
         </button>
-        <button
+        <button @click="isCompleted(task.id)"
           class="text-sm font-medium text-green-600 hover:text-green-500 focus:outline-none focus:underline transition duration-150 ease-in-out ml-2">
           Completed
         </button>
@@ -48,7 +49,6 @@ const newTaskText = ref("");
 const errorMsg = ref(null);
 const taskStore = useTaskStore();
 const tasks = ref(null);
-const isCompleted = ref(false);
 const promptMessage = ref(null);
 
 async function addTask() {
@@ -82,7 +82,7 @@ async function changeTask(id) {
 
   try {
     promptMessage.value = await prompt('Edit your task: ');
-    await taskStore.editTask( promptMessage.value, id);
+    await taskStore.editTask(promptMessage.value, id);
 
   } catch (e) {
     errorMsg.value = e.message;
@@ -91,8 +91,14 @@ async function changeTask(id) {
   }
 };
 
-/* async function changeTask(id) {
-  promptMessage.value = await prompt('Edit your task: ');
-  console.log(id + promptMessage.value);
-} */
+async function isCompleted(id) {
+  try {
+    await taskStore.isComplete(id);
+  } catch (e) {
+    errorMsg.value = e.message;
+    console.log(errorMsg.value);
+  }
+
+};
+
 </script>
