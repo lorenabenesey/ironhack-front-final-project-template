@@ -3,48 +3,35 @@
     <h1 class="text-2xl font-bold mb-4">To-Do List</h1>
     <ul class="task-list">
       <li v-for="task in taskStore.tasks" class="flex items-center mb-4">
-        <input
-          type="checkbox"
-          class="form-checkbox h-6 w-6 text-indigo-600 transition duration-150 ease-in-out"
-        />
+        <input type="checkbox" class="form-checkbox h-6 w-6 text-indigo-600 transition duration-150 ease-in-out" />
         <span class="ml-3 flex-1 font-medium text-gray-900">{{
           task.title
         }}</span>
-        <button
-          class="text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition duration-150 ease-in-out"
-        >
+        <button @click="changeTask(task.id)"
+          class="text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition duration-150 ease-in-out">
           Edit
         </button>
-        <button
-          @click="deleteTask(task.id)"
-          class="text-sm font-medium text-red-600 hover:text-red-500 focus:outline-none focus:underline transition duration-150 ease-in-out ml-2"
-        >
+        <button @click="deleteTask(task.id)"
+          class="text-sm font-medium text-red-600 hover:text-red-500 focus:outline-none focus:underline transition duration-150 ease-in-out ml-2">
           Delete
         </button>
         <button
-          class="text-sm font-medium text-green-600 hover:text-green-500 focus:outline-none focus:underline transition duration-150 ease-in-out ml-2"
-        >
+          class="text-sm font-medium text-green-600 hover:text-green-500 focus:outline-none focus:underline transition duration-150 ease-in-out ml-2">
           Completed
         </button>
       </li>
     </ul>
     <form @submit.prevent="addTask" class="flex items-center mt-4">
-      <input
-        v-model="newTaskText"
-        type="text"
+      <input v-model="newTaskText" type="text"
         class="form-input w-full py-2 px-3 rounded-md text-gray-900 leading-tight focus:outline-none focus:shadow-outline-blue focus:border-blue-300"
-        placeholder="Add a new task"
-      />
-      <button
-        type="submit"
-        class="ml-4 py-2 px-3 rounded-md text-sm font-medium leading-5 text-white bg-gray-800 hover:bg-gray-700 focus:outline-none focus:border-gray-700 focus:shadow-outline-indigo active:bg-gray-800"
-      >
+        placeholder="Add a new task" />
+      <button type="submit"
+        class="ml-4 py-2 px-3 rounded-md text-sm font-medium leading-5 text-white bg-gray-800 hover:bg-gray-700 focus:outline-none focus:border-gray-700 focus:shadow-outline-indigo active:bg-gray-800">
         Add Task
       </button>
     </form>
 
     <h1 class="text-2xl font-bold mb-4">Completed Tasks</h1>
-    
   </div>
 </template>
 
@@ -62,6 +49,7 @@ const errorMsg = ref(null);
 const taskStore = useTaskStore();
 const tasks = ref(null);
 const isCompleted = ref(false);
+const promptMessage = ref(null);
 
 async function addTask() {
   try {
@@ -90,7 +78,21 @@ async function deleteTask(id) {
   }
 };
 
+async function changeTask(id) {
 
+  try {
+    promptMessage.value = await prompt('Edit your task: ');
+    await taskStore.editTask( promptMessage.value, id);
 
+  } catch (e) {
+    errorMsg.value = e.message;
+    console.log(errorMsg.value);
 
+  }
+};
+
+/* async function changeTask(id) {
+  promptMessage.value = await prompt('Edit your task: ');
+  console.log(id + promptMessage.value);
+} */
 </script>
