@@ -1,7 +1,7 @@
 <template>
   <div class="container mx-auto p-4">
     <h1 class="text-2xl font-bold mb-4">To-Do List</h1>
-    <ul class="list-reset">
+    <ul class="task-list">
       <li v-for="task in taskStore.tasks" class="flex items-center mb-4">
         <input
           type="checkbox"
@@ -37,13 +37,14 @@
       />
       <button
         type="submit"
-        class="ml-4 py-2 px-3 rounded-md text-sm font-medium leading-5 text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-800"
+        class="ml-4 py-2 px-3 rounded-md text-sm font-medium leading-5 text-white bg-gray-800 hover:bg-gray-700 focus:outline-none focus:border-gray-700 focus:shadow-outline-indigo active:bg-gray-800"
       >
         Add Task
       </button>
     </form>
 
     <h1 class="text-2xl font-bold mb-4">Completed Tasks</h1>
+    
   </div>
 </template>
 
@@ -60,10 +61,12 @@ const newTaskText = ref("");
 const errorMsg = ref(null);
 const taskStore = useTaskStore();
 const tasks = ref(null);
+const isCompleted = ref(false);
 
 async function addTask() {
   try {
     await taskStore.addTask(newTaskText.value, userStore.user.id);
+    newTaskText.value = null;
   } catch (e) {
     errorMsg.value = e.message;
     console.log(errorMsg.value);
@@ -86,6 +89,8 @@ async function deleteTask(id) {
     console.log(errorMsg.value);
   }
 };
+
+
 
 
 </script>
