@@ -2,25 +2,25 @@
   <div class="container mx-auto p-4">
     <h1 class="text-2xl font-bold mb-4">To-Do List</h1>
     <ul class="task-list">
-      <li v-for="task in taskStore.tasks" class="flex items-center mb-4">
-        <input @click="isCompleted(task.id)" type="checkbox"
-          class="form-checkbox h-6 w-6 text-indigo-600 transition duration-150 ease-in-out" />
-        <span class="ml-3 flex-1 font-medium text-gray-900">{{
-          task.title
-        }}</span>
-        <button @click="changeTask(task.id)"
-          class="text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition duration-150 ease-in-out">
-          Edit
-        </button>
-        <button @click="deleteTask(task.id)"
-          class="text-sm font-medium text-red-600 hover:text-red-500 focus:outline-none focus:underline transition duration-150 ease-in-out ml-2">
-          Delete
-        </button>
-        <button @click="isCompleted(task.id)"
-          class="text-sm font-medium text-green-600 hover:text-green-500 focus:outline-none focus:underline transition duration-150 ease-in-out ml-2">
-          Completed
-        </button>
-      </li>
+      <div v-for="task in taskStore.tasks">
+        <li v-if="!task.is_complete" class="flex items-center mb-4">
+          <input @click="isCompleted(task.id)" type="checkbox"
+            class="form-checkbox h-6 w-6 text-indigo-600 transition duration-150 ease-in-out" />
+          <span v-if="!task.is_complete" class="ml-3 flex-1 font-medium text-gray-900">{{ task.title }}</span>
+          <button @click="changeTask(task.id)"
+            class="text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition duration-150 ease-in-out">
+            Edit
+          </button>
+          <button @click="deleteTask(task.id)"
+            class="text-sm font-medium text-red-600 hover:text-red-500 focus:outline-none focus:underline transition duration-150 ease-in-out ml-2">
+            Delete
+          </button>
+          <button @click="isCompleted(task.id)"
+            class="text-sm font-medium text-green-600 hover:text-green-500 focus:outline-none focus:underline transition duration-150 ease-in-out ml-2">
+            Mark as Completed
+          </button>
+        </li>
+      </div>
     </ul>
     <form @submit.prevent="addTask" class="flex items-center mt-4">
       <input v-model="newTaskText" type="text"
@@ -33,6 +33,23 @@
     </form>
 
     <h1 class="text-2xl font-bold mb-4">Completed Tasks</h1>
+    <ul class="task-list">
+      <div v-for="task in taskStore.tasks">
+        <li v-if="task.is_complete" class="flex items-center mb-4">
+          <span class="ml-3 flex-1 font-medium text-gray-400 line-through">{{
+            task.title
+          }}</span>
+          <button @click="deleteTask(task.id)"
+            class="text-sm font-medium text-red-600 hover:text-red-500 focus:outline-none focus:underline transition duration-150 ease-in-out ml-2">
+            Delete
+          </button>
+          <button @click="isNotCompleted(task.id)"
+            class="text-sm font-medium text-green-600 hover:text-green-500 focus:outline-none focus:underline transition duration-150 ease-in-out ml-2">
+            Mark as Uncompleted
+          </button>
+        </li>
+      </div>
+    </ul>
   </div>
 </template>
 
@@ -76,20 +93,17 @@ async function deleteTask(id) {
     errorMsg.value = e.message;
     console.log(errorMsg.value);
   }
-};
+}
 
 async function changeTask(id) {
-
   try {
-    promptMessage.value = await prompt('Edit your task: ');
+    promptMessage.value = await prompt("Edit your task: ");
     await taskStore.editTask(promptMessage.value, id);
-
   } catch (e) {
     errorMsg.value = e.message;
     console.log(errorMsg.value);
-
   }
-};
+}
 
 async function isCompleted(id) {
   try {
@@ -98,7 +112,14 @@ async function isCompleted(id) {
     errorMsg.value = e.message;
     console.log(errorMsg.value);
   }
+}
 
-};
-
+async function isNotCompleted(id) {
+  try {
+    await taskStore.isNotComplete(id);
+  } catch (e) {
+    errorMsg.value = e.message;
+    console.log(errorMsg.value);
+  }
+}
 </script>
