@@ -7,6 +7,8 @@
           <input @click="isCompleted(task.id)" type="checkbox"
             class="form-checkbox h-6 w-6 text-indigo-600 transition duration-150 ease-in-out" />
           <span v-if="!task.is_complete" class="ml-3 flex-1 font-medium text-gray-900">{{ task.title }}</span>
+          
+          <EditModal />
           <button @click="changeTask(task.id)"
             class="text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition duration-150 ease-in-out">
             Edit
@@ -58,6 +60,7 @@ import { ref } from "vue";
 import { useTaskStore } from "../store/task";
 import { useUserStore } from "../store/user";
 import { onMounted } from "vue";
+import EditModal from "../components/EditModal.vue";
 
 const userStore = useUserStore();
 
