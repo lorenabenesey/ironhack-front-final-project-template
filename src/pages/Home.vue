@@ -63,15 +63,12 @@ import { onMounted } from "vue";
 import EditModal from "../components/EditModal.vue";
 
 const userStore = useUserStore();
-
-const task = ref(null);
 const newTaskText = ref("");
 const errorMsg = ref(null);
 const taskStore = useTaskStore();
 const tasks = ref(null);
+const task = ref(null);
 const promptMessage = ref(null);
-
-
 
 
 async function addTask() {
