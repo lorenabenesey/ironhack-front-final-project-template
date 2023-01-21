@@ -8,7 +8,7 @@
             class="form-checkbox h-6 w-6 text-indigo-600 transition duration-150 ease-in-out" />
           <span v-if="!task.is_complete" class="ml-3 flex-1 font-medium text-gray-900">{{ task.title }}</span>
           
-          <EditModal />
+          <EditModal :id="task.id"/>
           <button @click="changeTask(task.id)"
             class="text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition duration-150 ease-in-out">
             Edit
@@ -70,6 +70,9 @@ const errorMsg = ref(null);
 const taskStore = useTaskStore();
 const tasks = ref(null);
 const promptMessage = ref(null);
+
+
+
 
 async function addTask() {
   try {
