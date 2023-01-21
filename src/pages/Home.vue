@@ -95,15 +95,21 @@ async function deleteTask(id) {
   }
 }
 
+
 async function changeTask(id) {
   try {
     promptMessage.value = await prompt("Edit your task: ");
-    await taskStore.editTask(promptMessage.value, id);
+    if (promptMessage.value !== "") {
+      await taskStore.editTask(promptMessage.value, id);
+    } else {
+      errorMsg.value = "Task cannot be empty";
+    }
   } catch (e) {
     errorMsg.value = e.message;
     console.log(errorMsg.value);
   }
 }
+
 
 async function isCompleted(id) {
   try {
