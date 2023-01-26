@@ -8,8 +8,10 @@
     </button>
     <div
       v-if="showModal"
-      class="bg-gray-100 fixed top-0 left-0 h-full w-full flex items-center justify-center"
+      class="fixed top-0 right-0 h-full w-full bg-black bg-opacity-75 transition duration-300 ease-in-out"
     >
+      <!-- class="bg-gray-100 fixed top-0 left-0 h-full w-full flex items-center justify-center" 
+      class="fixed top-0 right-0 h-full w-full transform -translate-x-full bg-black bg-opacity-75 transition duration-300 ease-in-out"-->
       <div class="bg-white p-7 rounded-lg">
         <form>
           <div class="border-4 px-12 py-4 rounded-lg w-full">
@@ -21,7 +23,10 @@
             />
 
             <div class="flex justify-end mt-4">
-              <button @click="changeTask(task.id)" class="bg-gray-800 text-white py-2 px-4 rounded-lg mr-2">
+              <button
+                @click="changeTask(task.id)"
+                class="bg-gray-800 text-white py-2 px-4 rounded-lg mr-2"
+              >
                 Save
               </button>
               <button
@@ -46,7 +51,6 @@ const errorMsg = ref(null);
 const editedTask = ref(null);
 const showModal = ref(false);
 const task = ref(null);
-
 
 /* async function changeTask(id) {
   try {

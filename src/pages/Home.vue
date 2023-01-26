@@ -26,7 +26,7 @@
     </ul>
     <form @submit.prevent="addTask" class="flex items-center mt-4">
       <input v-model="newTaskText" type="text"
-        class="form-input w-full py-2 px-3 rounded-md text-gray-900 leading-tight focus:outline-none focus:shadow-outline-blue focus:border-blue-300"
+        class="form-input w-2/5 py-2 px-3 rounded-md border text-gray-900 leading-tight focus:outline-none focus:shadow-outline-blue focus:border-blue-300"
         placeholder="Add a new task" />
       <button type="submit"
         class="ml-4 py-2 px-3 rounded-md text-sm font-medium leading-5 text-white bg-gray-800 hover:bg-gray-700 focus:outline-none focus:border-gray-700 focus:shadow-outline-indigo active:bg-gray-800">
@@ -34,7 +34,7 @@
       </button>
     </form>
 
-    <h1 class="text-2xl font-bold mb-4">Completed Tasks</h1>
+    <h1 class="text-2xl font-bold mb-4 mt-8">Completed Tasks</h1>
     <ul class="task-list">
       <div v-for="task in taskStore.tasks">
         <li v-if="task.is_complete" class="flex items-center mb-4">
