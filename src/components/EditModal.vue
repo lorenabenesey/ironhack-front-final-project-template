@@ -8,11 +8,10 @@
     </button>
     <div
       v-if="showModal"
-      class="fixed top-0 right-0 h-full w-full bg-black bg-opacity-75 transition duration-300 ease-in-out"
+      class="fixed top-0 right-0 h-full w-1/2 bg-black bg-opacity-75 transition duration-300 ease-in-out"
     >
-      <!-- class="bg-gray-100 fixed top-0 left-0 h-full w-full flex items-center justify-center" 
-      class="fixed top-0 right-0 h-full w-full transform -translate-x-full bg-black bg-opacity-75 transition duration-300 ease-in-out"-->
       <div class="bg-white p-7 rounded-lg">
+        
         <form>
           <div class="border-4 px-12 py-4 rounded-lg w-full">
             <label class="block font-medium mb-2">Task Name</label>
