@@ -130,7 +130,8 @@ async function deleteTask(id) {
 async function changeTask(id) {
   try {
     promptMessage.value = await prompt("Edit your task: ");
-    if (promptMessage.value !== "") {
+    console.log(promptMessage.value);
+    if (promptMessage.value !== "" || promptMessage.value == null) {
       await taskStore.editTask(promptMessage.value, id);
     } else {
       errorMsg.value = "Task cannot be empty";

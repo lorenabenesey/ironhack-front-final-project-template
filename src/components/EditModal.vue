@@ -53,7 +53,7 @@ const props = defineProps(['task.id'])
 
 
 
-async function changeTask(id) {
+/* async function changeTask(id) {
   try {
     if (taskName.value !== "") {
     await useTaskStore.editTask(taskName.value,task.id);
@@ -65,7 +65,7 @@ async function changeTask(id) {
     errorMsg.value = e.message;
     console.log(errorMsg.value);
 } 
-};
+}; */
 </script>
 
 <style scoped></style>
