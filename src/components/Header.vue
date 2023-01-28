@@ -10,6 +10,7 @@
     </div>
     <div>
       <router-link
+        v-if="!userStore.user"
         to="/auth"
         tag="button"
         class="px-4 py-2 text-sm font-semibold rounded-full leading-5 text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700"
@@ -37,12 +38,10 @@ async function logOut() {
   try {
     await userStore.signOut();
     router.push({ path: "/auth" });
-
   } catch (e) {
     errorMsg.value = e.message;
     console.log(errorMsg.value);
   }
-  
 }
 </script>
 <style></style>

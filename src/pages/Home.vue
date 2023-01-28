@@ -67,7 +67,7 @@
               class="mr-5"
             />
             <font-awesome-icon
-              :icon="['fas', 'plus']"
+              :icon="['fas', 'refresh']"
               @click="isNotCompleted(task.id)"
               class="mr-5"
             />
@@ -86,10 +86,10 @@ import { onMounted } from "vue";
 import EditModal from "../components/EditModal.vue";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faTrash, faEdit, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faEdit, faRefresh } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
-library.add(faTrash, faEdit, faPlus);
+library.add(faTrash, faEdit, faRefresh);
 
 const userStore = useUserStore();
 const newTaskText = ref("");

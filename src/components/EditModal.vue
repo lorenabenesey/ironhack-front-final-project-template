@@ -55,7 +55,7 @@ const props = defineProps(['task.id'])
 
 /* async function changeTask(id) {
   try {
-    if (taskName.value !== "") {
+    if (taskName.value !== null) {
     await useTaskStore.editTask(taskName.value,task.id);
     console.log(taskName.value);
   } else {
