@@ -33,11 +33,11 @@
 
     <div class="flex items-center justify-between">
       <button 
-        class="bg-gray-800 hover:bg-red-700 text-white font-bold py-2 px-4
+        class="bg-gray-800 hover:bg-blue-900 text-white font-bold py-2 px-4
         rounded focus:outline-none focus:shadow-outline" type="submit" > Login
       </button>
       <router-link class="text-sm mt-6 text-center" :to="{ name: 'Register' }"
-        >Don't have an account? <span class="text-gray-700 underline underline-offset-2 hover:text-red-700">Register</span>
+        >Don't have an account? <span class="text-gray-700 underline underline-offset-2 hover:text-blue-900">Register</span>
       </router-link>
     </div>
   </form>

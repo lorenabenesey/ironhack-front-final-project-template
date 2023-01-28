@@ -1,6 +1,7 @@
 <template>
   <Header />
   <router-view class="app-main" />
+  <Footer />
  
 </template>
 
@@ -10,6 +11,8 @@ import { storeToRefs } from "pinia";
 import { useRouter } from "vue-router";
 import { useUserStore } from "./store/user.js";
 import Header from "./components/Header.vue";
+import Footer from "./components/Footer.vue";
+
 
 
 const router = useRouter();

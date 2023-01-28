@@ -1,7 +1,28 @@
 <template>
   <div class="container mx-auto p-4">
-    <h1 class="text-2xl font-bold mb-4">To-Do List</h1>
+    <h1>
+      Welcome, user
+      <span class="text-gray-600 underline hover:text-red-500">{{
+        userStore.user.email
+      }}</span
+      >! Let's get started with your To-Do List.
+    </h1>
+    <h1 class="text-2xl font-bold mt-8 mb-4">To-Do List</h1>
     <ul class="task-list">
+      <form @submit.prevent="addTask" class="flex items-center mt-6 mb-8">
+      <input
+        v-model="newTaskText"
+        type="text"
+        class="form-input w-2/5 py-2 px-3 rounded-md border text-gray-900 leading-tight focus:outline-none focus:shadow-outline-blue focus:border-blue-300"
+        placeholder="Add a new task"
+      />
+      <button
+        type="submit"
+        class="ml-4 py-2 px-3 rounded-md text-sm font-medium leading-5 text-white bg-gray-700 hover:bg-blue-900 focus:outline-none focus:border-gray-700 focus:shadow-outline-indigo active:bg-gray-800"
+      >
+        Add Task
+      </button>
+    </form>
       <div v-for="task in taskStore.tasks">
         <li v-if="!task.is_complete" class="flex items-center mb-4">
           <input
@@ -14,9 +35,7 @@
             class="ml-3 flex-1 font-medium text-gray-900"
             >{{ task.title }}</span
           >
-
-          <EditModal :id="task.id" />
-
+          <EditModal :id="task.id" class="mr-4" />
           <div>
             <font-awesome-icon
               :icon="['fas', 'trash']"
@@ -27,27 +46,15 @@
               :icon="['fas', 'edit']"
               @click="changeTask(task.id)"
             />
+            
           </div>
         </li>
       </div>
     </ul>
-    <form @submit.prevent="addTask" class="flex items-center mt-4">
-      <input
-        v-model="newTaskText"
-        type="text"
-        class="form-input w-2/5 py-2 px-3 rounded-md border text-gray-900 leading-tight focus:outline-none focus:shadow-outline-blue focus:border-blue-300"
-        placeholder="Add a new task"
-      />
-      <button
-        type="submit"
-        class="ml-4 py-2 px-3 rounded-md text-sm font-medium leading-5 text-white bg-gray-800 hover:bg-gray-700 focus:outline-none focus:border-gray-700 focus:shadow-outline-indigo active:bg-gray-800"
-      >
-        Add Task
-      </button>
-    </form>
+    
 
     <h1 class="text-2xl font-bold mb-4 mt-8">Completed Tasks</h1>
-    <ul class="task-list">
+    <ul class="task-list mb-40">
       <div v-for="task in taskStore.tasks">
         <li v-if="task.is_complete" class="flex items-center mb-4">
           <span class="ml-3 flex-1 font-medium text-gray-400 line-through">{{
@@ -91,6 +98,7 @@ const taskStore = useTaskStore();
 const tasks = ref(null);
 const task = ref(null);
 const promptMessage = ref(null);
+const email = ref(null);
 
 async function addTask() {
   try {

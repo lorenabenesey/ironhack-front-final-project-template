@@ -1,17 +1,16 @@
 <template>
   <div>
     <button
-      class="bg-blue-500 text-white py-2 px-4 rounded-lg"
+      class="bg-gray-700  hover:bg-blue-900 text-white py-2 px-4 rounded-lg"
       @click="showModal = true"
     >
-      Edit Task
+      Edit
     </button>
     <div
       v-if="showModal"
-      class="fixed top-0 right-0 h-full w-1/2 bg-black bg-opacity-75 transition duration-300 ease-in-out"
+      class="fixed top-0 right-0 h-full w-full bg-black bg-opacity-75 transition duration-300 ease-in-out"
     >
       <div class="bg-white p-7 rounded-lg">
-        
         <form>
           <div class="border-4 px-12 py-4 rounded-lg w-full">
             <label class="block font-medium mb-2">Task Name</label>
@@ -47,18 +46,26 @@ import { ref } from "vue";
 import { useTaskStore } from "../store/task";
 
 const errorMsg = ref(null);
-const editedTask = ref(null);
+const taskName = ref(null);
 const showModal = ref(false);
 const task = ref(null);
+const props = defineProps(['task.id'])
 
-/* async function changeTask(id) {
+
+
+async function changeTask(id) {
   try {
-    await taskStore.editTask(editedTask.value, props.id);
-  } catch (e) {
+    if (taskName.value !== "") {
+    await useTaskStore.editTask(taskName.value,task.id);
+    console.log(taskName.value);
+  } else {
+      errorMsg.value = "Task cannot be empty";
+  } 
+} catch (e) {
     errorMsg.value = e.message;
     console.log(errorMsg.value);
-  }
-} */
+} 
+};
 </script>
 
 <style scoped></style>

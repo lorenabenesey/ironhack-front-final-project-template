@@ -3,8 +3,8 @@
     class="bg-gray-800 text-white p-4 lg:p-6 flex justify-between items-center lg:items-start"
   >
     <div class="flex items-center">
-      <router-link to="/auth" class="font-bold text-2xl lg:text-4xl"
-        >To do App</router-link
+      <router-link to="/auth" class="font-bold ml-6 text-2xl lg:text-4xl"
+        >Get ready App</router-link
       >
       <nav class="ml-6 lg:ml-12"></nav>
     </div>
